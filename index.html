@@ -1,0 +1,250 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Zuora REST API Reference</title>
+
+    <link href="stylesheets/screen.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" type="text/css" media="print" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+      <script src="javascripts/all.js" type="text/javascript"></script>
+
+      <script>
+        $(function() {
+          setupLanguages(["shell"]);
+        });
+      </script>
+  </head>
+
+  <body class="index">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar.png" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+      <img src="images/logo.png" />
+        <div class="lang-selector">
+              <a href="#" data-language-name="shell">cURL</a>
+        </div>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <div id="toc">
+      </div>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        
+          <h1 id='overview'>Overview</h1>
+<p>Zuora provides a number of REST resources, such as Accounts and Subscriptions. Most of them support several methods. The exceptions are Catalog, which simply returns your Zuora product catalog, and Connections , which logs you in to create a session cookie. In general, our REST API does not duplicate the functions of our SOAP API, but instead supports the basic use-cases needed for a web-based self-service storefront.</p>
+
+<p>You can use the <a href="https://knowledgecenter.zuora.com/D_REST_API/A_REST_basics/6_Developer_console">developer console</a> to try these calls and examine the results. </p>
+
+          <h1 id='authentication'>Authentication</h1>
+<p>There are three ways to authenticate:</p>
+
+<ol>
+<li> Obtain an authorization cookie by calling the REST connections resource with your API user ID and password. The cookie authorizes the user to make calls to the REST API for the duration specified in Administration Settings &gt; Security Policies &gt; Session timeout. The cookie expiration time is reset with this duration after every call to the REST API.</li>
+<li> Include the <strong>apiAccessKeyId</strong> and <strong>apiSecretAccessKey</strong> in the request header, which re-authenticates the user with each request.</li>
+<li> For CORS-enabled APIs only: Include a &lsquo;single-use&rsquo; token in the request header, which re-authenticates the user with each request. See below for more details.</li>
+</ol>
+
+<p>In the API reference material, we demonstrate the use of the <strong>apiAccessKeyId</strong> and <strong>apiSecretAccessKey</strong> in the CURL examples. Otherwise we generally assume that you are using the cookie.</p>
+<h2 id='token-authentication-for-cors-enabled-apis'>Token Authentication for CORS-Enabled APIs</h2>
+<p>The CORS mechanism enables REST API calls to Zuora to be made directly from your customer&rsquo;s browser, with all credit card and security information transmitted directly to Zuora. This minimizes your PCI compliance burden, allows you to implement advanced validation on your payment forms, and makes your payment forms look just like any other part of your website.</p>
+
+<p>For security reasons, instead of using cookies, an API request via CORS uses <strong>tokens</strong> for authentication.</p>
+
+          <h1 id='connections'>Connections</h1><h2 id='connections'>Connections</h2><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">POST https://api-sandbox.zuora.com/rest/v1/connections</code></p>
+<h1 id='accounts'>Accounts</h1><h2 id='accounts'>Accounts</h2><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">POST https://api-sandbox.zuora.com/rest/v1/accounts</code></p>
+<h2 id='accountsaccount-key-'>Accounts/{Account-Key:.*}</h2><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">PUT https://api-sandbox.zuora.com/rest/v1/accounts/{account-key:.*}</code></p>
+<h2 id='accountsaccount-key-summary'>Accounts/{Account-Key:.*}/Summary</h2><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://api-sandbox.zuora.com/rest/v1/accounts/{account-key:.*}/summary</code></p>
+<h2 id='accountsaccount-key-'>Accounts/{Account-Key:.*}</h2><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://api-sandbox.zuora.com/rest/v1/accounts/{account-key:.*}</code></p>
+<h1 id='catalog'>Catalog</h1><h2 id='catalogproducts'>Catalog/Products</h2><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://api-sandbox.zuora.com/rest/v1/catalog/products</code></p>
+<h1 id='charge-revenue-summaries'>Charge-Revenue-Summaries</h1><h2 id='charge-revenue-summariesrs-key'>Charge-Revenue-Summaries/{Rs-Key}</h2><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://api-sandbox.zuora.com/rest/v1/charge-revenue-summaries/{rs-key}</code></p>
+<h2 id='charge-revenue-summariessubscription-chargescharge-key'>Charge-Revenue-Summaries/Subscription-Charges/{Charge-Key}</h2><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://api-sandbox.zuora.com/rest/v1/charge-revenue-summaries/subscription-charges/{charge-key}</code></p>
+<h1 id='files'>Files</h1><h2 id='filesfile-id'>Files/{File-Id}</h2><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://api-sandbox.zuora.com/rest/v1/files/{file-id}</code></p>
+<h1 id='hostedpages'>Hostedpages</h1><h2 id='hostedpagespage-id-'>Hostedpages/{Page-Id:.*}</h2><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://api-sandbox.zuora.com/rest/v1/hostedpages/{page-id:.*}</code></p>
+<h2 id='hostedpages'>Hostedpages</h2><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://api-sandbox.zuora.com/rest/v1/hostedpages</code></p>
+<h1 id='jom'>Jom</h1><h2 id='jom'>Jom/**</h2><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">DELETE https://api-sandbox.zuora.com/rest/v1/jom/**</code></p>
+<h2 id='jom'>Jom</h2><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://api-sandbox.zuora.com/rest/v1/jom</code></p>
+<h2 id='jom'>Jom/**</h2><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://api-sandbox.zuora.com/rest/v1/jom/**</code></p>
+<h2 id='jom'>Jom/**</h2><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">POST https://api-sandbox.zuora.com/rest/v1/jom/**</code></p>
+<h2 id='jom'>Jom/**</h2><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">PUT https://api-sandbox.zuora.com/rest/v1/jom/**</code></p>
+<h1 id='operations'>Operations</h1><h2 id='operationstemplate-validation'>Operations/Template-Validation</h2><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">POST https://api-sandbox.zuora.com/rest/v1/operations/template-validation</code></p>
+<h2 id='operationsdocument-generation'>Operations/Document-Generation</h2><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">POST https://api-sandbox.zuora.com/rest/v1/operations/document-generation</code></p>
+<h2 id='operationsinvoice-collect'>Operations/Invoice-Collect</h2><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">POST https://api-sandbox.zuora.com/rest/v1/operations/invoice-collect</code></p>
+<h1 id='payment-methods'>Payment-Methods</h1><h2 id='payment-methodscredit-cards'>Payment-Methods/Credit-Cards</h2><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">POST https://api-sandbox.zuora.com/rest/v1/payment-methods/credit-cards</code></p>
+<h2 id='payment-methodscredit-cardspayment-method-id'>Payment-Methods/Credit-Cards/{Payment-Method-Id}</h2><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">PUT https://api-sandbox.zuora.com/rest/v1/payment-methods/credit-cards/{payment-method-id}</code></p>
+<h2 id='payment-methodspayment-method-id'>Payment-Methods/{Payment-Method-Id}</h2><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">DELETE https://api-sandbox.zuora.com/rest/v1/payment-methods/{payment-method-id}</code></p>
+<h2 id='payment-methodscredit-cardsaccountsaccount-key-'>Payment-Methods/Credit-Cards/Accounts/{Account-Key:.*}</h2><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://api-sandbox.zuora.com/rest/v1/payment-methods/credit-cards/accounts/{account-key:.*}</code></p>
+<h1 id='quotes'>Quotes</h1><h2 id='quotesdocument'>Quotes/Document</h2><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">POST https://api-sandbox.zuora.com/rest/v1/quotes/document</code></p>
+<h1 id='rsa-signatures'>Rsa-Signatures</h1><h2 id='rsa-signatures'>Rsa-Signatures</h2><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">POST https://api-sandbox.zuora.com/rest/v1/rsa-signatures</code></p>
+<h2 id='rsa-signaturesdecrypt'>Rsa-Signatures/Decrypt</h2><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">POST https://api-sandbox.zuora.com/rest/v1/rsa-signatures/decrypt</code></p>
+<h1 id='revenue-events'>Revenue-Events</h1><h2 id='revenue-eventsrs-key'>Revenue-Events/{Rs-Key}</h2><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://api-sandbox.zuora.com/rest/v1/revenue-events/{rs-key}</code></p>
+<h2 id='revenue-eventsrevenue-schedulesrs-key'>Revenue-Events/Revenue-Schedules/{Rs-Key}</h2><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://api-sandbox.zuora.com/rest/v1/revenue-events/revenue-schedules/{rs-key}</code></p>
+<h1 id='revenue-items'>Revenue-Items</h1><h2 id='revenue-itemscharge-revenue-summariesrs-key'>Revenue-Items/Charge-Revenue-Summaries/{Rs-Key}</h2><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://api-sandbox.zuora.com/rest/v1/revenue-items/charge-revenue-summaries/{rs-key}</code></p>
+<h2 id='revenue-itemsrevenue-schedulesrs-key'>Revenue-Items/Revenue-Schedules/{Rs-Key}</h2><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://api-sandbox.zuora.com/rest/v1/revenue-items/revenue-schedules/{rs-key}</code></p>
+<h2 id='revenue-itemsrevenue-schedulesrs-key'>Revenue-Items/Revenue-Schedules/{Rs-Key}</h2><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">PUT https://api-sandbox.zuora.com/rest/v1/revenue-items/revenue-schedules/{rs-key}</code></p>
+<h2 id='revenue-itemsrevenue-eventsrs-key'>Revenue-Items/Revenue-Events/{Rs-Key}</h2><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://api-sandbox.zuora.com/rest/v1/revenue-items/revenue-events/{rs-key}</code></p>
+<h2 id='revenue-itemsrevenue-eventsrs-key'>Revenue-Items/Revenue-Events/{Rs-Key}</h2><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">PUT https://api-sandbox.zuora.com/rest/v1/revenue-items/revenue-events/{rs-key}</code></p>
+<h1 id='revenue-recognition-rules'>Revenue-Recognition-Rules</h1><h2 id='revenue-recognition-rulessubscription-chargescharge-key'>Revenue-Recognition-Rules/Subscription-Charges/{Charge-Key}</h2><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://api-sandbox.zuora.com/rest/v1/revenue-recognition-rules/subscription-charges/{charge-key}</code></p>
+<h1 id='revenue-schedules'>Revenue-Schedules</h1><h2 id='revenue-schedulesrs-keydistribute-revenue-with-date-range'>Revenue-Schedules/{Rs-Key}/Distribute-Revenue-With-Date-Range</h2><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">PUT https://api-sandbox.zuora.com/rest/v1/revenue-schedules/{rs-key}/distribute-revenue-with-date-range</code></p>
+<h2 id='revenue-schedulesrs-keydistribute-revenue-across-accounting-periods'>Revenue-Schedules/{Rs-Key}/Distribute-Revenue-Across-Accounting-Periods</h2><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">PUT https://api-sandbox.zuora.com/rest/v1/revenue-schedules/{rs-key}/distribute-revenue-across-accounting-periods</code></p>
+<h2 id='revenue-schedulesrs-keybasic-information'>Revenue-Schedules/{Rs-Key}/Basic-Information</h2><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">PUT https://api-sandbox.zuora.com/rest/v1/revenue-schedules/{rs-key}/basic-information</code></p>
+<h2 id='revenue-schedulesrs-key'>Revenue-Schedules/{Rs-Key}</h2><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://api-sandbox.zuora.com/rest/v1/revenue-schedules/{rs-key}</code></p>
+<h2 id='revenue-schedulesinvoice-itemsii-id'>Revenue-Schedules/Invoice-Items/{Ii-Id}</h2><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://api-sandbox.zuora.com/rest/v1/revenue-schedules/invoice-items/{ii-id}</code></p>
+<h2 id='revenue-schedulesinvoice-item-adjustmentsiia-id'>Revenue-Schedules/Invoice-Item-Adjustments/{Iia-Id}</h2><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://api-sandbox.zuora.com/rest/v1/revenue-schedules/invoice-item-adjustments/{iia-id}</code></p>
+<h2 id='revenue-schedulessubscription-chargescharge-key'>Revenue-Schedules/Subscription-Charges/{Charge-Key}</h2><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">POST https://api-sandbox.zuora.com/rest/v1/revenue-schedules/subscription-charges/{charge-key}</code></p>
+<h2 id='revenue-schedulessubscription-chargescharge-key'>Revenue-Schedules/Subscription-Charges/{Charge-Key}</h2><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://api-sandbox.zuora.com/rest/v1/revenue-schedules/subscription-charges/{charge-key}</code></p>
+<h1 id='hmac-signatures'>Hmac-Signatures</h1><h2 id='hmac-signatures'>Hmac-Signatures</h2><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">POST https://api-sandbox.zuora.com/rest/v1/hmac-signatures</code></p>
+<h1 id='subscriptions'>Subscriptions</h1><h2 id='subscriptionssubscription-id-'>Subscriptions/{Subscription-Id:.*}</h2><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://api-sandbox.zuora.com/rest/v1/subscriptions/{subscription-id:.*}</code></p>
+<h2 id='subscriptionssubscription-id-cancel'>Subscriptions/{Subscription-Id:.*}/Cancel</h2><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">PUT https://api-sandbox.zuora.com/rest/v1/subscriptions/{subscription-id:.*}/cancel</code></p>
+<h2 id='subscriptions'>Subscriptions</h2><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">POST https://api-sandbox.zuora.com/rest/v1/subscriptions</code></p>
+<h2 id='subscriptionsaccountsaccount-key-'>Subscriptions/Accounts/{Account-Key:.*}</h2><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://api-sandbox.zuora.com/rest/v1/subscriptions/accounts/{account-key:.*}</code></p>
+<h2 id='subscriptionspreview'>Subscriptions/Preview</h2><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">POST https://api-sandbox.zuora.com/rest/v1/subscriptions/preview</code></p>
+<h2 id='subscriptionssubscription-id-'>Subscriptions/{Subscription-Id:.*}</h2><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">PUT https://api-sandbox.zuora.com/rest/v1/subscriptions/{subscription-id:.*}</code></p>
+<h2 id='subscriptionssubscription-id-renew'>Subscriptions/{Subscription-Id:.*}/Renew</h2><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">PUT https://api-sandbox.zuora.com/rest/v1/subscriptions/{subscription-id:.*}/renew</code></p>
+<h1 id='tenant'>Tenant</h1><h2 id='tenantaccount-numbertenant-id-'>Tenant/Account-Number/{Tenant-Id:.*}</h2><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://api-sandbox.zuora.com/rest/v1/tenant/account-number/{tenant-id:.*}</code></p>
+<h2 id='tenant'>Tenant</h2><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">POST https://api-sandbox.zuora.com/rest/v1/tenant</code></p>
+<h2 id='tenantinfo'>Tenant/Info</h2><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://api-sandbox.zuora.com/rest/v1/tenant/info</code></p>
+<h2 id='tenantinfotenant-id-'>Tenant/Info/{Tenant-Id:.*}</h2><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://api-sandbox.zuora.com/rest/v1/tenant/info/{tenant-id:.*}</code></p>
+<h2 id='tenantsandboxes'>Tenant/Sandboxes</h2><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://api-sandbox.zuora.com/rest/v1/tenant/sandboxes</code></p>
+<h1 id='transactions'>Transactions</h1><h2 id='transactionspaymentsaccountsaccount-key-'>Transactions/Payments/Accounts/{Account-Key:.*}</h2><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://api-sandbox.zuora.com/rest/v1/transactions/payments/accounts/{account-key:.*}</code></p>
+<h2 id='transactionsinvoicesaccountsaccount-key-'>Transactions/Invoices/Accounts/{Account-Key:.*}</h2><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://api-sandbox.zuora.com/rest/v1/transactions/invoices/accounts/{account-key:.*}</code></p>
+<h1 id='usage'>Usage</h1><h2 id='usage'>Usage</h2><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">POST https://api-sandbox.zuora.com/rest/v1/usage</code></p>
+<h2 id='usageaccountsaccount-key-'>Usage/Accounts/{Account-Key:.*}</h2><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://api-sandbox.zuora.com/rest/v1/usage/accounts/{account-key:.*}</code></p>
+<h2 id='usageimportidstatus'>Usage/{Importid}/Status</h2><h3 id='http-request'>HTTP Request</h3>
+<p><code class="prettyprint">GET https://api-sandbox.zuora.com/rest/v1/usage/{importID}/status</code></p>
+<h1 id='wadl'>Wadl</h1>
+          <h1 id='errors'>Errors</h1>
+<aside class="notice">This error section is stored in a separate file in `includes/_errors.md`. Slate allows you to optionally separate out your docs into many files&hellip;just save them to the `includes` folder and add them to the top of your `index.md`&rsquo;s frontmatter. Files are included in the order listed.</aside>
+
+<p>The Kittn API uses the following error codes:</p>
+
+<table><thead>
+<tr>
+<th>Error Code</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>400</td>
+<td>Bad Request &ndash; Your request sucks</td>
+</tr>
+<tr>
+<td>401</td>
+<td>Unauthorized &ndash; Your API key is wrong</td>
+</tr>
+<tr>
+<td>403</td>
+<td>Forbidden &ndash; The kitten requested is hidden for administrators only</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Not Found &ndash; The specified kitten could not be found</td>
+</tr>
+<tr>
+<td>405</td>
+<td>Method Not Allowed &ndash; You tried to access a kitten with an invalid method</td>
+</tr>
+<tr>
+<td>406</td>
+<td>Not Acceptable &ndash; You requested a format that isn&rsquo;t json</td>
+</tr>
+<tr>
+<td>410</td>
+<td>Gone &ndash; The kitten requested has been removed from our servers</td>
+</tr>
+<tr>
+<td>418</td>
+<td>I&rsquo;m a teapot</td>
+</tr>
+<tr>
+<td>429</td>
+<td>Too Many Requests &ndash; You&rsquo;re requesting too many kittens! Slown down!</td>
+</tr>
+<tr>
+<td>500</td>
+<td>Internal Server Error &ndash; We had a problem with our server. Try again later.</td>
+</tr>
+<tr>
+<td>503</td>
+<td>Service Unavailable &ndash; We&rsquo;re temporarially offline for maintanance. Please try again later.</td>
+</tr>
+</tbody></table>
+
+      </div>
+      <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="shell">cURL</a>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>
